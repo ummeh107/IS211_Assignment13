@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz Students Login</title>
+</head>
+<body>
+    <div class="row" style="margin: 50px auto; width: 400px;">
+        <form action="/login" method="post">
+            <h3 style="text-align: center;">Quiz Login</h3>
+            <hr>
+            <div class="control-group">
+                <!-- Username -->
+                <label class="control-label"  for="username">Username</label>
+                <div class="controls">
+                    <input type="text" name="username" >
+                </div>
+            </div>
+            <div class="control-group">
+                <!-- Password-->
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                    <input type="password" id="password" name="password" >
+                </div>
+            </div>
+            <br>
+            <div class="control-group">
+            <!-- Button -->
+                <div class="controls">
+                    <button class="btn btn-success">Submit</button>
+                </div>
+            </div>
+            <br>
+            {% if error %}
+            <span style="color:red">{{error}}</span>
+            {% endif %}
+        </form>    
+    </div>
+</body>
+</html>

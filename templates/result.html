@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Student</title>
+</head>
+<body>
+    <div class="row" style="margin: 50px auto; width: 400px;">
+        <span><h3 style="color: seagreen; text-align: center;">Quiz Result</h3></span><hr>
+        <div>
+            {% for std in student %}
+            <span><h4>ID :{{std[0]}}</h4><h4>Name: {{std[1]}} {{std[2]}}</h4></span>
+            {% endfor %}                
+            <div>
+                <span><h3>Results</h3></span>
+                {% if result | length != 0 %}
+                        <table>
+                            <tr>
+                                <th>Quiz Id</th>
+                                <th>Result</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                            </tr>
+                    {% for rslt in result %}
+                            <tr>
+                                <th>{{rslt[1]}}</th>
+                                <th>{{rslt[2]}}</th>
+                                <th>{{rslt[4]}}</th>
+                                <th>{{rslt[6]}}</th>
+                            </tr>
+                    {% endfor %}                            
+                        </table>
+                {% else %}
+                    <span><h4>Results are empty!</h4></span>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+
+        <br>
+        <div style="display: inline-block; ">
+            <div style="display: inline-block;"><a href="/dashboard">Go To Dashboard</a></div>
+        </div> 
+    </div>
+</body>
+</html>
+
+<style>
+table,  th, tr {
+    border: 0.5px solid black;
+/* width:75%; */
+}
+</style>

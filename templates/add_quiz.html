@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Quiz</title>
+</head>
+<body>
+    <div class="row" style="margin: 50px auto; width: 400px;">
+        <span><h3 style="color: seagreen; text-align: center;">Add Quiz</h3></span><hr>
+        <form action="/quiz" method="post" style="margin-left: 25%;">
+                <div class="control-group">
+                    <!-- Username -->
+                    <label class="control-label"  for="id">Id</label>
+                    <div class="controls">
+                        <input type="number" name="id" min="1">
+                    </div>
+                </div>
+                <br>
+                <div class="control-group">
+                    <!-- Username -->
+                    <label class="control-label"  for="subject">Subject</label>
+                    <div class="controls">
+                        <input type="text" name="subject" >
+                    </div>
+                </div>
+                <br>
+                <div class="control-group">
+                    <!-- Password-->
+                    <label class="control-label" for="password">No of Questions</label>
+                    <div class="controls">
+                        <input type="text"  name="question" >
+                    </div>
+                </div>
+                <br>
+                <div class="control-group">
+                    <!-- Password-->
+                    <label class="control-label" for="date">Date</label>
+                    <div class="controls">
+                        <input type="date"  name="date" >
+                    </div>
+                </div>
+                <br>
+                {% if error %}
+                <span><h5 style="color: red;">{{error}}</h5></span>
+                {% endif %}
+                <div class="control-group">
+                <!-- Button -->
+                    <div class="controls">
+                        <button class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</body>
+</html>

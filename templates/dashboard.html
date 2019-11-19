@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div  style="margin: 50px auto; width: 50%;"> 
+        <div style="display: inline-block; border: 1px solid; color: seagreen;">
+            <table>
+                <span ><h3 style="text-align: center;">Students</h3></span>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in students %}
+                    <tr>
+                        <th>
+                            {{i[0]}}
+                        </th>
+                        <th>
+                            {{i[1]}}
+                        </th>
+                        <th>
+                            {{i[2]}}
+                        </th>
+                        <th>
+                            <a href="/student/{{i[0]}}">Details</a>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </table>       
+            <br>     
+        </div>
+        <!-- <hr> -->
+        <div style="display: inline-block; border: 1px solid; color: seagreen;">
+                <table>
+                        <span><h3 style="text-align: center;">Quizzes</h3></span>
+                        <tr>
+                            <th>Id</th>
+                            <th>Subject</th>
+                            <th>No of Questions</th>
+                            <th>Date</th>
+                        </tr>
+                        {% for i in quizes %}
+                            <tr>
+                                <th>
+                                    {{i[0]}}
+                                </th>
+                                <th>
+                                    {{i[1]}}
+                                </th>
+                                <th>
+                                    {{i[2]}}
+                                </th>
+                                <th>
+                                    {{i[3]}}
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </table>     
+                    <br>
+        </div>
+        <br>
+
+        <br>
+        <div style="display: inline-block; ">
+            <div style="display: inline-block;"><a href="/student/add">Add Student</a></div>
+            <div style="display: inline-block;"><a href="/quiz/add">Add Quiz</a></div>
+            <div style="display: inline-block;"><a href="/results/add">Add Quiz Result</a></div>
+        </div>    
+    </div>
+</body>
+</html>
+<style>
+table,  th, tr {
+    border: 0.5px solid black;
+    /* width:75%; */
+  }
+  </style>
