@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Student</title>
+    <title>Student Result</title>
 </head>
 <body>
     <div class="row" style="margin: 50px auto; width: 400px;">
         <span><h3 style="color: seagreen; text-align: center;">Quiz Result</h3></span><hr>
         <div>
             {% for std in student %}
-            <span><h4>ID :{{std[0]}}</h4><h4>Name: {{std[1]}} {{std[2]}}</h4></span>
+            <span><h4>ID : {{std[0]}}</h4>
+                {% if logged %}
+                    <h4>Name: {{std[1]}} {{std[2]}}</h4></span>
+                {% endif %}    
             {% endfor %}                
             <div>
                 <span><h3>Results</h3></span>

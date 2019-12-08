@@ -7,7 +7,7 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <div  style="margin: 50px auto; width: 50%;"> 
+    <div  style="margin: 60px auto; width: 50%;"> 
         <div style="display: inline-block; border: 1px solid; color: seagreen;">
             <table>
                 <span ><h3 style="text-align: center;">Students</h3></span>
@@ -29,7 +29,8 @@
                             {{i[2]}}
                         </th>
                         <th>
-                            <a href="/student/{{i[0]}}">Details</a>
+                            <span><a href="/student/{{i[0]}}/results">Details</a></span>
+                            <span><a href="/student/delete/{{i[0]}}" style="color: rgb(247, 54, 54);">Delete</a></span>   
                         </th>
                     </tr>
                 {% endfor %}
@@ -39,31 +40,35 @@
         <!-- <hr> -->
         <div style="display: inline-block; border: 1px solid; color: seagreen;">
                 <table>
-                        <span><h3 style="text-align: center;">Quizzes</h3></span>
+                    <span><h3 style="text-align: center;">Quizzes</h3></span>
+                    <tr>
+                        <th>Id</th>
+                        <th>Subject</th>
+                        <th>No of Questions</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for i in quizes %}
                         <tr>
-                            <th>Id</th>
-                            <th>Subject</th>
-                            <th>No of Questions</th>
-                            <th>Date</th>
+                            <th>
+                                {{i[0]}}
+                            </th>
+                            <th>
+                                {{i[1]}}
+                            </th>
+                            <th>
+                                {{i[2]}}
+                            </th>
+                            <th>
+                                {{i[3]}}
+                            </th>
+                            <th>
+                                <span><a href="/quiz/delete/{{i[0]}}" style="color: rgb(247, 54, 54);">Delete</a></span>  
+                            </th>
                         </tr>
-                        {% for i in quizes %}
-                            <tr>
-                                <th>
-                                    {{i[0]}}
-                                </th>
-                                <th>
-                                    {{i[1]}}
-                                </th>
-                                <th>
-                                    {{i[2]}}
-                                </th>
-                                <th>
-                                    {{i[3]}}
-                                </th>
-                            </tr>
-                        {% endfor %}
-                    </table>     
-                    <br>
+                    {% endfor %}
+                </table>     
+                <br>
         </div>
         <br>
 

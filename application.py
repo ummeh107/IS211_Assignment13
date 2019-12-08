@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, url_for, redirect, session
 import sqlite3 as lite
 import os
@@ -96,29 +95,58 @@ def add_result():
         std_id = request.form['std_id']
         quiz_id = request.form['quiz_id']
         result = request.form['result']
-
-        saved = query_fetch_data('insert into Student_Results(student_id, quiz_id, result) values (?, ?, ?)', (int(std_id), int(quiz_id), int(result)))
-        if saved:
-            return redirect('/dashboard') 
+        if int(result) > 0 and result != None:
+            saved = query_fetch_data('insert into Student_Results(student_id, quiz_id, result) values (?, ?, ?)', (int(std_id), int(quiz_id), int(result)))
+            if saved:
+                return redirect('/dashboard') 
+            else:
+                return render_template('add_result.html',error='Not saved, Please try again!')
         else:
-            return render_template('add_result.html',error='Not saved, Please try again!')
+            return render_template('add_result.html', error = 'Not saved, please try again!')
 
-@app.route('/student/<id>', methods=['GET'])
+@app.route('/student/<id>/results', methods=['GET'])
 def student_details(id):
+    std = query_fetch_data('select * from Students where id=?',(id))
+    rslt = query_fetch_data('select * from Student_Results inner join Quizzes on Student_Results.quiz_id = Quizzes.id where student_id=?', (id))    
     if 'user' in session:
-        std = query_fetch_data('select * from Students where id=?',(id))
-        rslt = query_fetch_data('select * from Student_Results inner join Quizzes on Student_Results.quiz_id = Quizzes.id where student_id=?', (id))
-        return render_template('result.html', student=std, result = rslt)
+        return render_template('result.html', student=std, result = rslt, logged=True)
+    elif 'user' not in session:
+        return render_template('result.html', student=std, result = rslt, logged=False)
     else:
         return redirect('/')
 
+@app.route('/student/delete/<id>', methods=['GET'])
+def delete_student(id):
+    if 'user' in session:
+        rslt = query_fetch_data('DELETE from Student_Results WHERE student_id=?', (id),"DELETE")
+        if rslt != False:
+            query_fetch_data('DELETE from Students where id=?', (id),  "DELETE")
+            return redirect('/dashboard')
+        else:
+            return render_template('dashboard.html', error='Invalid action!') 
 
-def query_fetch_data(query, item=None):
+@app.route('/quiz/delete/<id>', methods=['GET'])
+def delete_quiz(id):
+    if 'user' in session:
+        rslt = query_fetch_data('DELETE from Quizzes where id=?', (id),  "DELETE")
+        if rslt != False:
+            return redirect('/dashboard')
+        else:
+            return render_template('dashboard.html', error='Invalid action!')                
+
+
+def query_fetch_data(query, item=None, method=None):
     conn = lite.connect('hw13.db')
     db = conn.cursor()
-    print(item)
     if item == None:
         db.execute(query)
+    elif method == "DELETE":
+        try:
+            db.execute(query, item)
+            conn.commit()
+            return True
+        except:
+            return False        
     elif len(item) == 1:
         try:
             db.execute(query, item)
